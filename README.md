@@ -2,13 +2,13 @@
 
 ![cover](./assets/cover.png)
 
-<https://hub.oomol.com/package/cute-signature-generator>
-
 ---
 
 ## 📖 Introduction
 
 **Cute Signature Generator** is a signature generation tool based on the OOMOL platform that creates handwritten-style signatures with adorable cartoon decorations. It supports various cute elements like cats, bunnies, stars, hearts, and more to create personalized kawaii-style signatures.
+
+Use on OOMOL Hub: <https://hub.oomol.com/package/cute-signature-generator>
 
 ---
 

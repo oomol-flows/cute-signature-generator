@@ -2,13 +2,13 @@
 
 ![cover](./assets/cover.png)
 
-<https://hub.oomol.com/package/cute-signature-generator>
-
 ---
 
 ## 📖 简介
 
 **Cute Signature Generator** 是一个基于 OOMOL 平台的签名生成工具，能够创建带有可爱卡通装饰的手写风格签名。支持小猫、兔子、星星、爱心等多种萌趣元素，打造专属的个性化签名。
+
+在 OOMOL Hub 上使用: <https://hub.oomol.com/package/cute-signature-generator>
 
 ---
 
