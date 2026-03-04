@@ -9,5 +9,7 @@
   "sig-dec": "decorative elements",
   "ai-image-generator-images-files-output1": "File paths of generated images",
   "cute-signature-generator": "Cute Signature Generator",
-  "pkg-desc": "An tool that creates adorable handwritten signature designs with cute cartoon decorations. Generate personalized signatures featuring animals, stars, hearts, and more in a kawaii art style."
+  "pkg-desc": "An tool that creates adorable handwritten signature designs with cute cartoon decorations. Generate personalized signatures featuring animals, stars, hearts, and more in a kawaii art style.",
+  "default-name": "Default Name",
+  "default-decorations": "Default Decorations"
 }

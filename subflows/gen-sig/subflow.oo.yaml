@@ -65,12 +65,6 @@ nodes:
         from_node:
           - node_id: prompt-editor#1
             output_handle: prompt
-          - node_id: prompt-editor#2
-            output_handle: prompt
-          - node_id: prompt-editor#4
-            output_handle: prompt
-          - node_id: prompt-editor#3
-            output_handle: prompt
       - handle: aspectRatio
         value: 1:1
         from_flow:
@@ -90,26 +84,76 @@ nodes:
     title: "提示词 #1"
     inputs_from:
       - handle: template
-        value: "Cute handwritten English signature for the name '{{name}}', decorated
-          with {{decorations}}, along with cute animals like cats, bunnies, or
-          birds, plus stars, hearts, and sparkles. Style: fine-tip pen
-          handwriting, slim elegant strokes, fountain pen effect, smooth flowing
-          lines, natural ink writing, not bold, not thick, delicate lettering,
-          cartoon decorations around the text, soft colors for decorations only.
-          Format: flat 2D digital illustration, straight-on view, no
-          perspective, no desk, no table, no background surface, pure white
-          canvas, kawaii aesthetic, cursive signature style\n"
+        value: "{{name}}.
+
+
+          Integrate one decorative illustration inspired by
+          {{decorations}} into the name composition so it visually interacts
+          with the text. Position it naturally above, beside, or partially
+          around the name.
+
+
+          Add 4–8 small accent elements (such as tiny stars, hearts,
+          dots, sparkles, leaves, or mini shapes inspired by {{decorations}}).
+          Decorate them randomly and organically around the name. Keep them
+          smaller than the main illustration.
+
+
+          Font style: {{font_style}}.   Style: {{decoration_style}}.
+          Format: {{format}}.\n"
       - handle: name
         value:
         from_node:
-          - node_id: +condition#1
-            output_handle: case
+          - node_id: prompt-editor#6
+            output_handle: prompt
+          - node_id: prompt-editor#7
+            output_handle: prompt
       - handle: decorations
         value:
         from_flow:
-          - input_handle: decorations
+          []
+        from_node:
+          - node_id: +condition#2
+            output_handle: case
+          - node_id: prompt-editor#2
+            output_handle: prompt
+      - handle: format
+        value: flat 2D digital illustration, straight-on view, no perspective, no desk,
+          no table, no background surface, pure white canvas, kawaii aesthetic,
+          cursive signature style
+        from_node:
+          - node_id: +value#2
+            output_handle: format
+      - handle: font_style
+        value: dark color cursive fountain pen handwriting, slim elegant strokes, smooth
+          flowing lines, smooth rounded letters, flowing connected strokes,
+          playful and soft style, delicate lettering
+        from_node:
+          - node_id: +value#2
+            output_handle: font_style
+      - handle: decoration_style
+        value: cartoon decorations around the text, kawaii aesthetic, soft colors for
+          decorations only
+        from_node:
+          - node_id: +value#2
+            output_handle: decoration_style
     task: llm::prompt-editor
     inputs_def:
+      - handle: font_style
+        json_schema:
+          type: string
+          ui:widget: text
+        nullable: false
+      - handle: decoration_style
+        json_schema:
+          type: string
+          ui:widget: text
+        nullable: false
+      - handle: format
+        json_schema:
+          type: string
+          ui:widget: text
+        nullable: false
       - handle: name
         description: "%prompt-var%"
         json_schema:
@@ -131,22 +175,10 @@ nodes:
           expressions:
             - input_handle: name
               operator: is not empty
-            - input_handle: decorations
-              operator: is not empty
-        - handle: case2
-          logical: AND
-          expressions:
-            - input_handle: name
-              operator: is not empty
-            - input_handle: decorations
-              operator: is empty
+      default:
+        handle: default
     inputs_def:
       - handle: name
-        json_schema:
-          type: string
-          ui:widget: text
-        nullable: true
-      - handle: decorations
         json_schema:
           type: string
           ui:widget: text
@@ -156,64 +188,6 @@ nodes:
         value:
         from_flow:
           - input_handle: name
-      - handle: decorations
-        value:
-        from_flow:
-          - input_handle: decorations
-  - node_id: prompt-editor#2
-    title: "提示词 #2"
-    inputs_from:
-      - handle: template
-        value: "Cute handwritten English signature for the name '{{name}}', decorated
-          with cute animals like cats, bunnies, puppies, birds, or bears, along
-          with stars, hearts, flowers, and sparkles. Style: fine-tip pen
-          handwriting, slim elegant strokes, fountain pen effect, smooth flowing
-          lines, natural ink writing, not bold, not thick, delicate lettering,
-          cartoon decorations around the text, soft colors for decorations only.
-          Format: flat 2D digital illustration, straight-on view, no
-          perspective, no desk, no table, no background surface, pure white
-          canvas, kawaii aesthetic, cursive signature style\n"
-      - handle: name
-        value:
-        from_node:
-          - node_id: +condition#1
-            output_handle: case2
-    task: llm::prompt-editor
-    inputs_def:
-      - handle: name
-        description: "%prompt-var%"
-        json_schema:
-          type: string
-          ui:widget: text
-        value: hello!
-        nullable: true
-  - node_id: prompt-editor#3
-    title: "提示词 #3"
-    inputs_from:
-      - handle: template
-        value: "Cute signature decoration showcase featuring {{decorations}}, along with
-          cute animals like cats, bunnies, or birds, plus stars, hearts, and
-          sparkles. Style: fine-tip pen handwriting, slim elegant strokes,
-          fountain pen effect, smooth flowing lines, natural ink writing, not
-          bold, not thick, delicate lettering, cartoon decorations, soft colors.
-          Format: flat 2D digital illustration, straight-on view, no
-          perspective, no desk, no table, no background surface, pure white
-          canvas, kawaii aesthetic, cursive signature style, reference sheet for
-          signature customization\n"
-      - handle: decorations
-        value: null
-        from_node:
-          - node_id: +condition#2
-            output_handle: case
-    task: llm::prompt-editor
-    inputs_def:
-      - handle: decorations
-        description: "%prompt-var%"
-        json_schema:
-          type: string
-          ui:widget: text
-        value: hello!
-        nullable: true
   - node_id: +condition#2
     title: "Condition #2"
     inputs_from:
@@ -221,17 +195,8 @@ nodes:
         value: null
         from_flow:
           - input_handle: decorations
-      - handle: name
-        value: null
-        from_flow:
-          - input_handle: name
     inputs_def:
       - handle: decorations
-        json_schema:
-          type: string
-          ui:widget: text
-        nullable: true
-      - handle: name
         json_schema:
           type: string
           ui:widget: text
@@ -241,45 +206,10 @@ nodes:
         - handle: case
           logical: AND
           expressions:
-            - input_handle: name
-              operator: is empty
             - input_handle: decorations
               operator: is not empty
-        - handle: case2
-          logical: AND
-          expressions:
-            - input_handle: name
-              operator: is empty
-            - input_handle: decorations
-              operator: is empty
-  - node_id: prompt-editor#4
-    title: "提示词 #4"
-    inputs_from:
-      - handle: template
-        value: >
-          A collection of cute handwritten signature examples, fine-tip pen
-          handwriting, slim elegant strokes, fountain pen effect, smooth flowing
-          lines, natural ink writing, not bold, not thick, delicate lettering,
-          decorated with cute animals like cats, bunnies, puppies, birds, bears,
-          along with stars, hearts, flowers, and sparkles, soft colors for
-          decorations only. Format: flat 2D digital illustration, straight-on
-          view, no perspective, no desk, no table, no background surface, pure
-          white canvas, kawaii aesthetic, multiple signature styles displayed
-          together, cursive signature style
-      - handle: _
-        value: null
-        from_node:
-          - node_id: +condition#2
-            output_handle: case2
-    task: llm::prompt-editor
-    inputs_def:
-      - handle: _
-        description: "%prompt-var%"
-        json_schema:
-          type: string
-          ui:widget: text
-        value: hello!
-        nullable: true
+      default:
+        handle: default
   - node_id: +javascript#1
     title: "Preview #1"
     icon: ":twemoji:face-with-monocle:"
@@ -306,6 +236,91 @@ nodes:
         from_node:
           - node_id: nano-banana-pro-image-generate#1
             output_handle: images
+  - node_id: +value#2
+    title: "Value #2"
+    values:
+      - handle: font_style
+        json_schema:
+          type: string
+          ui:widget: text
+        value: cute monoline cursive script font. Smooth rounded letters, flowing
+          connected strokes. Add elegant swashes and gentle decorative
+          flourishes to the capital letter and the ending stroke. Extend the
+          entry and exit strokes slightly to create graceful curves, while
+          keeping the text clean and highly readable
+      - handle: decoration_style
+        json_schema:
+          type: string
+          ui:widget: text
+        value: cartoon decorations around the text, kawaii aesthetic, soft colors for
+          decorations only
+      - handle: format
+        json_schema:
+          type: string
+          ui:widget: text
+        value: flat 2D digital illustration, straight-on view, no perspective, no desk,
+          no table, no background surface, not bold, not thick, no shadow, no
+          texture, pure white canvas
+  - node_id: prompt-editor#6
+    title: "%default-name%"
+    inputs_from:
+      - handle: template
+        value: "Create a nursery name design that says a random name in a cute monoline
+          cursive script font. "
+      - handle: input
+        value: hello!
+        from_node:
+          - node_id: +condition#1
+            output_handle: default
+    task: llm::prompt-editor
+    inputs_def:
+      - handle: input
+        description: "%prompt-var%"
+        json_schema:
+          type: string
+          ui:widget: text
+        value: hello!
+        nullable: true
+  - node_id: prompt-editor#7
+    title: "name"
+    inputs_from:
+      - handle: template
+        value: Create a nursery name design that says "{{name}}" in a cute monoline
+          cursive script font.
+      - handle: name
+        value: hello!
+        from_node:
+          - node_id: +condition#1
+            output_handle: case
+    task: llm::prompt-editor
+    inputs_def:
+      - handle: name
+        description: "%prompt-var%"
+        json_schema:
+          type: string
+          ui:widget: text
+        value: hello!
+        nullable: true
+  - node_id: prompt-editor#2
+    title: "%default-decorations%"
+    inputs_from:
+      - handle: template
+        value: cute animals like cats, bunnies, or birds, plus stars, hearts, and
+          sparkles
+      - handle: _
+        value: hello!
+        from_node:
+          - node_id: +condition#2
+            output_handle: default
+    task: llm::prompt-editor
+    inputs_def:
+      - handle: _
+        description: "%prompt-var%"
+        json_schema:
+          type: string
+          ui:widget: text
+        value: hello!
+        nullable: true
 title: "%gen-sig%"
 outputs_from:
   - handle: success

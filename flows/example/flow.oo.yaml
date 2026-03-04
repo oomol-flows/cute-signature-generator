@@ -3,7 +3,7 @@ nodes:
     title: "生成可爱风签名 #1"
     inputs_from:
       - handle: name
-        value: Mia
+        value: Lucy
       - handle: decorations
         value:
       - handle: aspectRatio
