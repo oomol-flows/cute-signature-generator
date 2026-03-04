@@ -2,6 +2,8 @@
 
 ![cover](./assets/cover.png)
 
+<https://hub.oomol.com/package/cute-signature-generator>
+
 ---
 
 ## 📖 Introduction
