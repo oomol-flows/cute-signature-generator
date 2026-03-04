@@ -1,0 +1,312 @@
+inputs_def:
+  - handle: name
+    description: "%sig-name%"
+    json_schema:
+      type: string
+    value:
+    nullable: true
+  - handle: decorations
+    description: "%sig-dec%"
+    json_schema:
+      type: string
+    value:
+    nullable: true
+  - group: Options
+  - handle: aspectRatio
+    description: "%ai-image-generator-aspect-ratio-input%"
+    json_schema:
+      type: string
+      enum:
+        - 21:9
+        - 16:9
+        - 3:2
+        - 4:3
+        - 5:4
+        - 1:1
+        - 4:5
+        - 3:4
+        - 2:3
+        - 9:16
+    value: 16:9
+    nullable: true
+    executor_name: python
+  - handle: resolution
+    description: "%ai-image-generator-resolution-input%"
+    json_schema:
+      type: string
+      enum:
+        - 1K
+        - 2K
+        - 4K
+    value: 1K
+    nullable: true
+    executor_name: python
+outputs_def:
+  - handle: success
+    json_schema:
+      type: boolean
+    nullable: false
+    description: "%ai-image-generator-success-output%"
+    executor_name: python
+  - handle: images
+    json_schema:
+      type: array
+      items:
+        type: string
+        ui:widget: file
+    nullable: false
+    description: "%ai-image-generator-images-files-output%"
+    executor_name: python
+nodes:
+  - node_id: nano-banana-pro-image-generate#1
+    title: "Nano Banana Pro 图像生成 #1"
+    inputs_from:
+      - handle: prompt
+        from_node:
+          - node_id: prompt-editor#1
+            output_handle: prompt
+          - node_id: prompt-editor#2
+            output_handle: prompt
+          - node_id: prompt-editor#4
+            output_handle: prompt
+          - node_id: prompt-editor#3
+            output_handle: prompt
+      - handle: aspectRatio
+        value: 1:1
+        from_flow:
+          - input_handle: aspectRatio
+      - handle: outputFormat
+        value: png
+      - handle: resolution
+        value: 1K
+        from_flow:
+          - input_handle: resolution
+      - handle: pollingInterval
+        value: 2
+      - handle: timeout
+        value: 300
+    subflow: nano_banana_pro::nano-banana-pro-image-generate
+  - node_id: prompt-editor#1
+    title: "提示词 #1"
+    inputs_from:
+      - handle: template
+        value: "Cute handwritten English signature for the name '{{name}}', decorated
+          with {{decorations}}, along with cute animals like cats, bunnies, or
+          birds, plus stars, hearts, and sparkles. Style: fine-tip pen
+          handwriting, slim elegant strokes, fountain pen effect, smooth flowing
+          lines, natural ink writing, not bold, not thick, delicate lettering,
+          cartoon decorations around the text, soft colors for decorations only,
+          white background, kawaii aesthetic, cursive signature style\n"
+      - handle: name
+        value:
+        from_node:
+          - node_id: +condition#1
+            output_handle: case
+      - handle: decorations
+        value:
+        from_flow:
+          - input_handle: decorations
+    task: llm::prompt-editor
+    inputs_def:
+      - handle: name
+        description: "%prompt-var%"
+        json_schema:
+          type: string
+          ui:widget: text
+        value: hello!
+        nullable: true
+      - handle: decorations
+        json_schema:
+          type: string
+          ui:widget: text
+        nullable: true
+  - node_id: +condition#1
+    title: "Condition #1"
+    conditions:
+      cases:
+        - handle: case
+          logical: AND
+          expressions:
+            - input_handle: name
+              operator: is not empty
+            - input_handle: decorations
+              operator: is not empty
+        - handle: case2
+          logical: AND
+          expressions:
+            - input_handle: name
+              operator: is not empty
+            - input_handle: decorations
+              operator: is empty
+    inputs_def:
+      - handle: name
+        json_schema:
+          type: string
+          ui:widget: text
+        nullable: true
+      - handle: decorations
+        json_schema:
+          type: string
+          ui:widget: text
+        nullable: true
+    inputs_from:
+      - handle: name
+        value:
+        from_flow:
+          - input_handle: name
+      - handle: decorations
+        value:
+        from_flow:
+          - input_handle: decorations
+  - node_id: prompt-editor#2
+    title: "提示词 #2"
+    inputs_from:
+      - handle: template
+        value: "Cute handwritten English signature for the name '{{name}}', decorated
+          with cute animals like cats, bunnies, puppies, birds, or bears, along
+          with stars, hearts, flowers, and sparkles. Style: fine-tip pen
+          handwriting, slim elegant strokes, fountain pen effect, smooth flowing
+          lines, natural ink writing, not bold, not thick, delicate lettering,
+          cartoon decorations around the text, soft colors for decorations only,
+          white background, kawaii aesthetic, cursive signature style\n"
+      - handle: name
+        value:
+        from_node:
+          - node_id: +condition#1
+            output_handle: case2
+    task: llm::prompt-editor
+    inputs_def:
+      - handle: name
+        description: "%prompt-var%"
+        json_schema:
+          type: string
+          ui:widget: text
+        value: hello!
+        nullable: true
+  - node_id: prompt-editor#3
+    title: "提示词 #3"
+    inputs_from:
+      - handle: template
+        value: "Cute signature decoration showcase featuring {{decorations}}, along with
+          cute animals like cats, bunnies, or birds, plus stars, hearts, and
+          sparkles. Style: fine-tip pen handwriting, slim elegant strokes,
+          fountain pen effect, smooth flowing lines, natural ink writing, not
+          bold, not thick, delicate lettering, cartoon decorations, soft colors,
+          white background, kawaii aesthetic, cursive signature style, reference
+          sheet for signature customization\n"
+      - handle: decorations
+        value: null
+        from_node:
+          - node_id: +condition#2
+            output_handle: case
+    task: llm::prompt-editor
+    inputs_def:
+      - handle: decorations
+        description: "%prompt-var%"
+        json_schema:
+          type: string
+          ui:widget: text
+        value: hello!
+        nullable: true
+  - node_id: +condition#2
+    title: "Condition #2"
+    inputs_from:
+      - handle: decorations
+        value: null
+        from_flow:
+          - input_handle: decorations
+      - handle: name
+        value: null
+        from_flow:
+          - input_handle: name
+    inputs_def:
+      - handle: decorations
+        json_schema:
+          type: string
+          ui:widget: text
+        nullable: true
+      - handle: name
+        json_schema:
+          type: string
+          ui:widget: text
+        nullable: true
+    conditions:
+      cases:
+        - handle: case
+          logical: AND
+          expressions:
+            - input_handle: name
+              operator: is empty
+            - input_handle: decorations
+              operator: is not empty
+        - handle: case2
+          logical: AND
+          expressions:
+            - input_handle: name
+              operator: is empty
+            - input_handle: decorations
+              operator: is empty
+  - node_id: prompt-editor#4
+    title: "提示词 #4"
+    inputs_from:
+      - handle: template
+        value: >
+          A collection of cute handwritten signature examples, fine-tip pen
+          handwriting, slim elegant strokes, fountain pen effect, smooth flowing
+          lines, natural ink writing, not bold, not thick, delicate lettering,
+          decorated with cute animals like cats, bunnies, puppies, birds, bears,
+          along with stars, hearts, flowers, and sparkles, soft colors for
+          decorations only, white background, kawaii aesthetic, multiple
+          signature styles displayed together, cursive signature style
+      - handle: _
+        value: null
+        from_node:
+          - node_id: +condition#2
+            output_handle: case2
+    task: llm::prompt-editor
+    inputs_def:
+      - handle: _
+        description: "%prompt-var%"
+        json_schema:
+          type: string
+          ui:widget: text
+        value: hello!
+        nullable: true
+  - node_id: +javascript#1
+    title: "Preview #1"
+    icon: ":twemoji:face-with-monocle:"
+    task:
+      ui:
+        default_width: 450
+      inputs_def:
+        - handle: images
+          json_schema:
+            type: array
+            items:
+              type: string
+              ui:widget: file
+          nullable: false
+          description: "%ai-image-generator-images-files-output1%"
+      outputs_def:
+        []
+      executor:
+        name: nodejs
+        options:
+          entry: scriptlets/+scriptlet#2.js
+    inputs_from:
+      - handle: images
+        from_node:
+          - node_id: nano-banana-pro-image-generate#1
+            output_handle: images
+title: "%gen-sig%"
+outputs_from:
+  - handle: success
+    from_node:
+      - node_id: nano-banana-pro-image-generate#1
+        output_handle: success
+  - handle: images
+    from_node:
+      - node_id: nano-banana-pro-image-generate#1
+        output_handle: images
+forward_previews:
+  - +javascript#1

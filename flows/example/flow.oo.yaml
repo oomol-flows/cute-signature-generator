@@ -1,0 +1,15 @@
+nodes:
+  - node_id: gen-sig#1
+    title: "生成可爱风签名 #1"
+    inputs_from:
+      - handle: name
+        value: Mia
+      - handle: decorations
+        value:
+      - handle: aspectRatio
+        value: 16:9
+      - handle: resolution
+        value: 1K
+    subflow: self::gen-sig
+    ignore: false
+title: Example

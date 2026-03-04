@@ -1,0 +1,11 @@
+{
+  "gen-sig": "生成可爱风签名",
+  "ai-image-generator-prompt-input": "描述所需图像的文本提示",
+  "ai-image-generator-success-output": "指示提交是否成功",
+  "ai-image-generator-images-files-output": "生成的图像文件路径",
+  "ai-image-generator-aspect-ratio-input": "生成图像的宽高比",
+  "ai-image-generator-resolution-input": "图像分辨率（1K、2K 或 4K）",
+  "sig-name": "要生成的名字",
+  "sig-dec": "装饰元素",
+  "ai-image-generator-images-files-output1": "生成的图像文件路径"
+}

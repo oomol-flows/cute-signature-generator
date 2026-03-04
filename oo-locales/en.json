@@ -1,0 +1,11 @@
+{
+  "gen-sig": "generate-cute-signature",
+  "ai-image-generator-prompt-input": "Text prompt describing the desired image",
+  "ai-image-generator-success-output": "Indicates if submission succeeded",
+  "ai-image-generator-images-files-output": "File paths of generated images",
+  "ai-image-generator-aspect-ratio-input": "Aspect ratio for the generated image",
+  "ai-image-generator-resolution-input": "Image resolution (1K, 2K, or 4K)",
+  "sig-name": "Name to be generated",
+  "sig-dec": "decorative elements",
+  "ai-image-generator-images-files-output1": "File paths of generated images"
+}
