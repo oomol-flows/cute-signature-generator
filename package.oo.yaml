@@ -9,3 +9,4 @@ name: cute-signature-generator
 repository: https://github.com/oomol-flows/cute-signature-generator
 displayName: "%cute-signature-generator%"
 description: "%pkg-desc%"
+icon: ":twemoji:cat:"
