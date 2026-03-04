@@ -95,8 +95,10 @@ nodes:
           birds, plus stars, hearts, and sparkles. Style: fine-tip pen
           handwriting, slim elegant strokes, fountain pen effect, smooth flowing
           lines, natural ink writing, not bold, not thick, delicate lettering,
-          cartoon decorations around the text, soft colors for decorations only,
-          white background, kawaii aesthetic, cursive signature style\n"
+          cartoon decorations around the text, soft colors for decorations only.
+          Format: flat 2D digital illustration, straight-on view, no
+          perspective, no desk, no table, no background surface, pure white
+          canvas, kawaii aesthetic, cursive signature style\n"
       - handle: name
         value:
         from_node:
@@ -167,8 +169,10 @@ nodes:
           with stars, hearts, flowers, and sparkles. Style: fine-tip pen
           handwriting, slim elegant strokes, fountain pen effect, smooth flowing
           lines, natural ink writing, not bold, not thick, delicate lettering,
-          cartoon decorations around the text, soft colors for decorations only,
-          white background, kawaii aesthetic, cursive signature style\n"
+          cartoon decorations around the text, soft colors for decorations only.
+          Format: flat 2D digital illustration, straight-on view, no
+          perspective, no desk, no table, no background surface, pure white
+          canvas, kawaii aesthetic, cursive signature style\n"
       - handle: name
         value:
         from_node:
@@ -191,9 +195,11 @@ nodes:
           cute animals like cats, bunnies, or birds, plus stars, hearts, and
           sparkles. Style: fine-tip pen handwriting, slim elegant strokes,
           fountain pen effect, smooth flowing lines, natural ink writing, not
-          bold, not thick, delicate lettering, cartoon decorations, soft colors,
-          white background, kawaii aesthetic, cursive signature style, reference
-          sheet for signature customization\n"
+          bold, not thick, delicate lettering, cartoon decorations, soft colors.
+          Format: flat 2D digital illustration, straight-on view, no
+          perspective, no desk, no table, no background surface, pure white
+          canvas, kawaii aesthetic, cursive signature style, reference sheet for
+          signature customization\n"
       - handle: decorations
         value: null
         from_node:
@@ -256,8 +262,10 @@ nodes:
           lines, natural ink writing, not bold, not thick, delicate lettering,
           decorated with cute animals like cats, bunnies, puppies, birds, bears,
           along with stars, hearts, flowers, and sparkles, soft colors for
-          decorations only, white background, kawaii aesthetic, multiple
-          signature styles displayed together, cursive signature style
+          decorations only. Format: flat 2D digital illustration, straight-on
+          view, no perspective, no desk, no table, no background surface, pure
+          white canvas, kawaii aesthetic, multiple signature styles displayed
+          together, cursive signature style
       - handle: _
         value: null
         from_node:

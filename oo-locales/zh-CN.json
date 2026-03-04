@@ -7,5 +7,8 @@
   "ai-image-generator-resolution-input": "图像分辨率（1K、2K 或 4K）",
   "sig-name": "要生成的名字",
   "sig-dec": "装饰元素",
-  "ai-image-generator-images-files-output1": "生成的图像文件路径"
+  "ai-image-generator-images-files-output1": "生成的图像文件路径",
+  "cute-signature-generator": "可爱风格签名生成器",
+  "key1": "",
+  "pkg-desc": "可爱签名设计工具，可生成带有卡通装饰的手写签名。支持小猫、兔子、星星、爱心等多种可爱元素，打造专属的萌趣风格签名。"
 }

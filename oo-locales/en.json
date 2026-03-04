@@ -7,5 +7,7 @@
   "ai-image-generator-resolution-input": "Image resolution (1K, 2K, or 4K)",
   "sig-name": "Name to be generated",
   "sig-dec": "decorative elements",
-  "ai-image-generator-images-files-output1": "File paths of generated images"
+  "ai-image-generator-images-files-output1": "File paths of generated images",
+  "cute-signature-generator": "Cute Signature Generator",
+  "pkg-desc": "An tool that creates adorable handwritten signature designs with cute cartoon decorations. Generate personalized signatures featuring animals, stars, hearts, and more in a kawaii art style."
 }
