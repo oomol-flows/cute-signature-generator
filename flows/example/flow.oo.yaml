@@ -5,7 +5,7 @@ nodes:
       - handle: name
         value: Lucy
       - handle: decorations
-        value:
+        value: cat
       - handle: aspectRatio
         value: 16:9
       - handle: resolution

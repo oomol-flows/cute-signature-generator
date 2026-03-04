@@ -87,19 +87,22 @@ nodes:
         value: "{{name}}.
 
 
-          Integrate one decorative illustration inspired by
-          {{decorations}} into the name composition so it visually interacts
-          with the text. Position it naturally above, beside, or partially
-          around the name.
+          Create one decorative illustration inspired by
+          {{decorations}}. Integrate it into the name composition so it visually
+          interacts with the text. Position it naturally above, beside, or
+          partially around the name.
 
 
           Add 4–8 small accent elements (such as tiny stars, hearts,
           dots, sparkles, leaves, or mini shapes inspired by {{decorations}}).
-          Decorate them randomly and organically around the name. Keep them
-          smaller than the main illustration.
+          Decorate them randomly and lively around the name to create a warm and
+          cozy vibe. Keep them smaller than the main illustration.
 
 
-          Font style: {{font_style}}.   Style: {{decoration_style}}.
+          Font style: {{font_style}}.
+
+          Style: {{decoration_style}}.
+
           Format: {{format}}.\n"
       - handle: name
         value:
@@ -243,7 +246,9 @@ nodes:
         json_schema:
           type: string
           ui:widget: text
-        value: cute monoline cursive script font. Smooth rounded letters, flowing
+        value: Cute monoline cursive script font, not bold, not thick, no shadow, no
+          texture. Dark ink color. Fountain pen handwritten effect, slim elegant
+          strokes, natural ink writing. Smooth rounded letters, flowing
           connected strokes. Add elegant swashes and gentle decorative
           flourishes to the capital letter and the ending stroke. Extend the
           entry and exit strokes slightly to create graceful curves, while
@@ -252,15 +257,13 @@ nodes:
         json_schema:
           type: string
           ui:widget: text
-        value: cartoon decorations around the text, kawaii aesthetic, soft colors for
-          decorations only
+        value: cute cartoon decorations around the text, kawaii aesthetic
       - handle: format
         json_schema:
           type: string
           ui:widget: text
-        value: flat 2D digital illustration, straight-on view, no perspective, no desk,
-          no table, no background surface, not bold, not thick, no shadow, no
-          texture, pure white canvas
+        value: flat vector illustration, straight-on view, no perspective, no desk, no
+          table, no background surface, pure white canvas
   - node_id: prompt-editor#6
     title: "%default-name%"
     inputs_from:
